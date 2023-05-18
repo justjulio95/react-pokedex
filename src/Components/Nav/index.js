@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Nav, Navbar, Form, InputGroup, Button } from 'react-bootstrap'
 
 function NavBar() {
+  const [formState, setFormState] = useState({ name_search: '', number_search: ''})
+  const {name_search, number_search} = formState;
+
+
+  function handleChange(e) {
+    setFormState({ ...formState, [e.target.name]: e.target.value })
+  }
+
+  console.log(formState)
   return(
     <div className="w-100 w-75">
       <Navbar bg='primary' expand='lg' style={{zIndex: 2}}>
@@ -16,10 +25,12 @@ function NavBar() {
           <Form>
             <InputGroup className="px-3 col-lg">
               <Form.Control
-                placeholder="Search by Name"
+                defaultValue={name_search}
                 aria-label="name_search"
+                onChange={handleChange}
+                name="name_search"
                 />
-              <Button variant="info">Search</Button>
+              <Button variant="info" type="submit">Search</Button>
             </InputGroup>
           </Form>
         </Nav.Item>
@@ -27,10 +38,12 @@ function NavBar() {
           <Form>
             <InputGroup className="px-3 col-lg">
               <Form.Control
-                placeholder="Search by Number"
-                aria-label="name_search"
+                defaultValue={number_search}
+                aria-label="number_search"
+                onChange={handleChange}
+                name="number_search"
                 />
-              <Button variant="info">Search</Button>
+              <Button variant="info" type='submit'>Search</Button>
             </InputGroup>
           </Form>
         </Nav.Item>
